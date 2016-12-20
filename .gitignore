@@ -118,3 +118,11 @@ applet/
 #PlatformIO files/dirs
 .pioenvs
 .piolib
+Marlin_Reach3D/Marlin_Reach3D/Marlin_Reach3D.vcxproj
+*.opensdf
+Marlin_Reach3D/ipch/marlin_reach3d-14c96/marlin_reach3d-9b9fd7c8.ipch
+Marlin_Reach3D/Marlin_Reach3D.suo
+*.filters
+Marlin_Reach3D/Marlin_Reach3D/Marlin_Reach3D.vcxproj.user
+*.sln
+Marlin_Reach3D/Marlin_Reach3D.sdf

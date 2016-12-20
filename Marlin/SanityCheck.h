@@ -267,8 +267,8 @@
  */
 #if EXTRUDERS > 1
 
-  #if EXTRUDERS > 4
-    #error "The maximum number of EXTRUDERS in Marlin is 4."
+  #if EXTRUDERS > 7
+    #error "The maximum number of EXTRUDERS in Marlin is 7."
   #endif
 
   #if ENABLED(TEMP_SENSOR_1_AS_REDUNDANT)
@@ -815,7 +815,19 @@
 /**
  * Test Extruder Pins
  */
-#if EXTRUDERS > 3
+#if EXTRUDERS > 6
+  #if !PIN_EXISTS(E6_STEP) || !PIN_EXISTS(E6_DIR) || !PIN_EXISTS(E6_ENABLE)
+    #error "E6_STEP_PIN, E6_DIR_PIN, or E6_ENABLE_PIN not defined for this board."
+  #endif
+#elif EXTRUDERS > 5
+  #if !PIN_EXISTS(E5_STEP) || !PIN_EXISTS(E5_DIR) || !PIN_EXISTS(E5_ENABLE)
+    #error "E5_STEP_PIN, E5_DIR_PIN, or E5_ENABLE_PIN not defined for this board."
+  #endif
+#elif EXTRUDERS > 4
+  #if !PIN_EXISTS(E4_STEP) || !PIN_EXISTS(E4_DIR) || !PIN_EXISTS(E4_ENABLE)
+    #error "E4_STEP_PIN, E4_DIR_PIN, or E4_ENABLE_PIN not defined for this board."
+  #endif
+#elif EXTRUDERS > 3
   #if !PIN_EXISTS(E3_STEP) || !PIN_EXISTS(E3_DIR) || !PIN_EXISTS(E3_ENABLE)
     #error "E3_STEP_PIN, E3_DIR_PIN, or E3_ENABLE_PIN not defined for this board."
   #endif

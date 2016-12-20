@@ -1153,6 +1153,21 @@ void Config_ResetDefault() {
           CONFIG_ECHO_START;
           SERIAL_ECHOPAIR("  M200 T3 D", filament_size[3]);
           SERIAL_EOL;
+			#if EXTRUDERS > 4
+				CONFIG_ECHO_START;
+				SERIAL_ECHOPAIR("  M200 T4 D", filament_size[4]);
+				SERIAL_EOL;
+				#if EXTRUDERS > 5
+					CONFIG_ECHO_START;
+					SERIAL_ECHOPAIR("  M200 T5 D", filament_size[5]);
+					SERIAL_EOL;
+					#if EXTRUDERS > 6
+						CONFIG_ECHO_START;
+						SERIAL_ECHOPAIR("  M200 T6 D", filament_size[6]);
+						SERIAL_EOL;
+					#endif
+				#endif
+	        #endif
         #endif
       #endif
     #endif

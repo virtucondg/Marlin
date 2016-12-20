@@ -269,14 +269,23 @@
 #define MSG_E2 "E2"
 #define MSG_E3 "E3"
 #define MSG_E4 "E4"
+#define MSG_E5 "E5"
+#define MSG_E6 "E6"
+#define MSG_E7 "E7"
 #define MSG_MOVE_E1 "1"
 #define MSG_MOVE_E2 "2"
 #define MSG_MOVE_E3 "3"
 #define MSG_MOVE_E4 "4"
+#define MSG_MOVE_E5 "5"
+#define MSG_MOVE_E6 "6"
+#define MSG_MOVE_E7 "7"
 #define MSG_DIAM_E1 " 1"
 #define MSG_DIAM_E2 " 2"
 #define MSG_DIAM_E3 " 3"
 #define MSG_DIAM_E4 " 4"
+#define MSG_DIAM_E5 " 5"
+#define MSG_DIAM_E6 " 6"
+#define MSG_DIAM_E7 " 7"
 
 #include INCLUDE_LANGUAGE
 

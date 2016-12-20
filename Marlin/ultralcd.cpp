@@ -878,6 +878,15 @@ void kill_screen(const char* lcd_msg) {
         MENU_ITEM_EDIT(int3, MSG_FLOW MSG_N3, &flow_percentage[2], 10, 999);
         #if EXTRUDERS > 3
           MENU_ITEM_EDIT(int3, MSG_FLOW MSG_N4, &flow_percentage[3], 10, 999);
+        #if EXTRUDERS > 4
+          MENU_ITEM_EDIT(int3, MSG_FLOW MSG_N5, &flow_percentage[4], 10, 999);
+        #if EXTRUDERS > 5
+          MENU_ITEM_EDIT(int3, MSG_FLOW MSG_N6, &flow_percentage[5], 10, 999);
+        #if EXTRUDERS > 6
+          MENU_ITEM_EDIT(int3, MSG_FLOW MSG_N7, &flow_percentage[6], 10, 999);
+        #endif //EXTRUDERS > 6
+        #endif //EXTRUDERS > 5
+        #endif //EXTRUDERS > 4
         #endif //EXTRUDERS > 3
       #endif //EXTRUDERS > 2
     #endif //EXTRUDERS > 1
@@ -2111,6 +2120,15 @@ KeepDrawing:
           MENU_MULTIPLIER_ITEM_EDIT_CALLBACK(float43, MSG_FILAMENT_DIAM MSG_DIAM_E3, &filament_size[2], 1.5, 3.25, calculate_volumetric_multipliers);
           #if EXTRUDERS > 3
             MENU_MULTIPLIER_ITEM_EDIT_CALLBACK(float43, MSG_FILAMENT_DIAM MSG_DIAM_E4, &filament_size[3], 1.5, 3.25, calculate_volumetric_multipliers);
+          #if EXTRUDERS > 4
+            MENU_MULTIPLIER_ITEM_EDIT_CALLBACK(float43, MSG_FILAMENT_DIAM MSG_DIAM_E5, &filament_size[4], 1.5, 3.25, calculate_volumetric_multipliers);
+          #if EXTRUDERS > 5
+            MENU_MULTIPLIER_ITEM_EDIT_CALLBACK(float43, MSG_FILAMENT_DIAM MSG_DIAM_E6, &filament_size[5], 1.5, 3.25, calculate_volumetric_multipliers);
+          #if EXTRUDERS > 6
+            MENU_MULTIPLIER_ITEM_EDIT_CALLBACK(float43, MSG_FILAMENT_DIAM MSG_DIAM_E7, &filament_size[6], 1.5, 3.25, calculate_volumetric_multipliers);
+          #endif //EXTRUDERS > 3
+          #endif //EXTRUDERS > 3
+          #endif //EXTRUDERS > 3
           #endif //EXTRUDERS > 3
         #endif //EXTRUDERS > 2
       #endif //EXTRUDERS > 1

@@ -857,8 +857,8 @@ void Planner::_buffer_line(const float &a, const float &b, const float &c, const
       for (uint8_t i = 0; i < EXTRUDERS; i++)
         if (g_uc_extruder_last_move[i] > 0) g_uc_extruder_last_move[i]--;
 
-      switch(extruder) {
-        case 0:
+      //switch(extruder) {
+      if (extruder == 0) {
           enable_e0();
           #if ENABLED(DUAL_X_CARRIAGE)
             if (extruder_duplication_enabled) {
@@ -867,55 +867,66 @@ void Planner::_buffer_line(const float &a, const float &b, const float &c, const
             }
           #endif
           g_uc_extruder_last_move[0] = (BLOCK_BUFFER_SIZE) * 2;
-          #if EXTRUDERS > 1
-            if (g_uc_extruder_last_move[1] == 0) disable_e1();
-            #if EXTRUDERS > 2
-              if (g_uc_extruder_last_move[2] == 0) disable_e2();
-              #if EXTRUDERS > 3
-                if (g_uc_extruder_last_move[3] == 0) disable_e3();
-              #endif
-            #endif
-          #endif
-        break;
-        #if EXTRUDERS > 1
-          case 1:
-            enable_e1();
-            g_uc_extruder_last_move[1] = (BLOCK_BUFFER_SIZE) * 2;
-            if (g_uc_extruder_last_move[0] == 0) disable_e0();
-            #if EXTRUDERS > 2
-              if (g_uc_extruder_last_move[2] == 0) disable_e2();
-              #if EXTRUDERS > 3
-                if (g_uc_extruder_last_move[3] == 0) disable_e3();
-              #endif
-            #endif
-          break;
-          #if EXTRUDERS > 2
-            case 2:
-              enable_e2();
-              g_uc_extruder_last_move[2] = (BLOCK_BUFFER_SIZE) * 2;
-              if (g_uc_extruder_last_move[0] == 0) disable_e0();
-              if (g_uc_extruder_last_move[1] == 0) disable_e1();
-              #if EXTRUDERS > 3
-                if (g_uc_extruder_last_move[3] == 0) disable_e3();
-              #endif
-            break;
-            #if EXTRUDERS > 3
-              case 3:
-                enable_e3();
-                g_uc_extruder_last_move[3] = (BLOCK_BUFFER_SIZE) * 2;
-                if (g_uc_extruder_last_move[0] == 0) disable_e0();
-                if (g_uc_extruder_last_move[1] == 0) disable_e1();
-                if (g_uc_extruder_last_move[2] == 0) disable_e2();
-              break;
-            #endif // EXTRUDERS > 3
-          #endif // EXTRUDERS > 2
-        #endif // EXTRUDERS > 1
+	  } else {
+          if (g_uc_extruder_last_move[0] == 0) disable_e0();
+	  }
+	#if EXTRUDERS > 1
+	  if (extruder == 1) {
+		  enable(e1);
+          g_uc_extruder_last_move[1] = (BLOCK_BUFFER_SIZE) * 2;
+	  } else {
+          if (g_uc_extruder_last_move[1] == 0) disable_e1();
+	  }
+		#if EXTRUDERS > 2
+			if (extruder == 2) {
+				enable(e2);
+				g_uc_extruder_last_move[2] = (BLOCK_BUFFER_SIZE) * 2;
+			} else {
+				if (g_uc_extruder_last_move[2] == 0) disable_e1();
+			}
+			#if EXTRUDERS > 3
+				if (extruder == 3) {
+					enable(e3);
+					g_uc_extruder_last_move[3] = (BLOCK_BUFFER_SIZE) * 2;
+				} else {
+					if (g_uc_extruder_last_move[3] == 0) disable_e1();
+				}
+				#if EXTRUDERS > 4
+					if (extruder == 4) {
+						enable(e4);
+						g_uc_extruder_last_move[4] = (BLOCK_BUFFER_SIZE) * 2;
+					} else {
+						if (g_uc_extruder_last_move[4] == 0) disable_e1();
+					}
+					#if EXTRUDERS > 5
+						if (extruder == 5) {
+							enable(e5);
+							g_uc_extruder_last_move[5] = (BLOCK_BUFFER_SIZE) * 2;
+						} else {
+							if (g_uc_extruder_last_move[5] == 0) disable_e1();
+						}
+						#if EXTRUDERS > 6
+							if (extruder == 6) {
+								enable(e6);
+								g_uc_extruder_last_move[6] = (BLOCK_BUFFER_SIZE) * 2;
+							} else {
+								if (g_uc_extruder_last_move[6] == 0) disable_e1();
+							}
+						#endif		  
+					#endif		  
+				#endif		  
+			#endif		  
+		#endif		  
+	#endif		  
       }
     #else
       enable_e0();
       enable_e1();
       enable_e2();
       enable_e3();
+      enable_e4();
+      enable_e5();
+      enable_e6();
     #endif
   }
 

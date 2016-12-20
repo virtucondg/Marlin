@@ -172,6 +172,12 @@
   #include "pins_MKS_13.h"
 #elif MB(SAINSMART_2IN1)
   #include "pins_SAINSMART_2IN1.h"
+#elif MB(REACH3D)
+  #define IS_RAMPS_EFB
+  #include "pins_REACH3D.h"
+#elif MB(REACH3DXL)
+  #define IS_RAMPS_EFB //IS_RAMPS_EEB for two beds
+  #include "pins_REACH3D.h"
 #else
   #error "Unknown MOTHERBOARD value set in Configuration.h"
 #endif
@@ -320,6 +326,14 @@
       #if EXTRUDERS > 4
         #undef _E4_PINS
         #define _E4_PINS E4_STEP_PIN, E4_DIR_PIN, E4_ENABLE_PIN,
+		#if EXTRUDERS > 5
+			#undef _E5_PINS
+			#define _E5_PINS E5_STEP_PIN, E5_DIR_PIN, E5_ENABLE_PIN,
+			#if EXTRUDERS > 6
+				#undef _E6_PINS
+				#define _E6_PINS E6_STEP_PIN, E6_DIR_PIN, E6_ENABLE_PIN,
+		#endif
+      #endif
       #endif
     #endif
   #endif

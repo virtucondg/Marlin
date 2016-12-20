@@ -7344,6 +7344,9 @@ inline void gcode_M503() {
     disable_e1();
     disable_e2();
     disable_e3();
+    disable_e4();
+    disable_e5();
+    disable_e6();
     delay(100);
 
     #if HAS_BUZZER
@@ -8001,7 +8004,7 @@ void tool_change(const uint8_t tmp_extruder, const float fr_mm_s/*=0.0*/, bool n
 }
 
 /**
- * T0-T3: Switch tool, usually switching extruders
+ * T0-T6: Switch tool, usually switching extruders
  *
  *   F[units/min] Set the movement feedrate
  *   S1           Don't move the tool in XY after change
