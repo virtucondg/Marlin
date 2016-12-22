@@ -81,12 +81,16 @@
 #define ZERO(a) memset(a,0,sizeof(a))
 
 // Macros for initializing arrays
-#define ARRAY_6(v1, v2, v3, v4, v5, v6, ...) { v1, v2, v3, v4, v5, v6 }
-#define ARRAY_5(v1, v2, v3, v4, v5, ...)     { v1, v2, v3, v4, v5 }
-#define ARRAY_4(v1, v2, v3, v4, ...)         { v1, v2, v3, v4 }
-#define ARRAY_3(v1, v2, v3, ...)             { v1, v2, v3 }
-#define ARRAY_2(v1, v2, ...)                 { v1, v2 }
-#define ARRAY_1(v1, ...)                     { v1 }
+#define ARRAY_10(v1, v2, v3, v4, v5, v6, v7, v8, v9, v10...) { v1, v2, v3, v4, v5, v6, v7, v8, v9, v10 }
+#define ARRAY_9(v1, v2, v3, v4, v5, v6, v7, v8, v9, ...)     { v1, v2, v3, v4, v5, v6, v7, v8, v9 }
+#define ARRAY_8(v1, v2, v3, v4, v5, v6, v7, v8, ...)         { v1, v2, v3, v4, v5, v6, v7, v8 }
+#define ARRAY_7(v1, v2, v3, v4, v5, v6, v7...)				 { v1, v2, v3, v4, v5, v6, v7 }
+#define ARRAY_6(v1, v2, v3, v4, v5, v6, ...)  				 { v1, v2, v3, v4, v5, v6 }
+#define ARRAY_5(v1, v2, v3, v4, v5, ...)    				 { v1, v2, v3, v4, v5 }
+#define ARRAY_4(v1, v2, v3, v4, ...)           				 { v1, v2, v3, v4 }
+#define ARRAY_3(v1, v2, v3, ...)               				 { v1, v2, v3 }
+#define ARRAY_2(v1, v2, ...)                   				 { v1, v2 }
+#define ARRAY_1(v1, ...)                       				 { v1 }
 
 #define _ARRAY_N(N, ...) ARRAY_ ##N(__VA_ARGS__)
 #define ARRAY_N(N, ...) _ARRAY_N(N, __VA_ARGS__)

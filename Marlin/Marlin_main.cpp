@@ -5917,6 +5917,9 @@ inline void gcode_M18_M84() {
           disable_e1();
           disable_e2();
           disable_e3();
+          disable_e4();
+          disable_e5();
+          disable_e6();
         }
       #endif
     }
@@ -7664,6 +7667,7 @@ inline void gcode_M907() {
      *   D[factor] Mix factor for extruder stepper 4
      *   H[factor] Mix factor for extruder stepper 5
      *   I[factor] Mix factor for extruder stepper 6
+     *   J[factor] Mix factor for extruder stepper 7
      *
      */
     inline void gcode_M165() { gcode_get_mix(); }
@@ -10427,11 +10431,11 @@ void setup() {
 
   #if ENABLED(MIXING_EXTRUDER) && MIXING_VIRTUAL_TOOLS > 1
     // Initialize mixing to 100% color 1
-    for (uint8_t i = 0; i < MIXING_STEPPERS; i++)
+    for (uint8_t i = 0; i < MIXING_STEPPERS; i++) {
       mixing_factor[i] = (i == 0) ? 1.0 : 0.0;
-    for (uint8_t t = 0; t < MIXING_VIRTUAL_TOOLS; t++)
-      for (uint8_t i = 0; i < MIXING_STEPPERS; i++)
+	  for (uint8_t t = 0; t < MIXING_VIRTUAL_TOOLS; t++)
         mixing_virtual_tool_mix[t][i] = mixing_factor[i];
+	}
   #endif
 
   #if ENABLED(EXPERIMENTAL_I2CBUS) && I2C_SLAVE_ADDRESS > 0

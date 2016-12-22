@@ -83,6 +83,15 @@
   #if ENABLED(E3_IS_TMC)
     TMC26XStepper stepperE3(200, E3_ENABLE_PIN, E3_STEP_PIN, E3_DIR_PIN, E3_MAX_CURRENT, E3_SENSE_RESISTOR);
   #endif
+  #if ENABLED(E4_IS_TMC)
+    TMC26XStepper stepperE4(200, E4_ENABLE_PIN, E4_STEP_PIN, E4_DIR_PIN, E4_MAX_CURRENT, E4_SENSE_RESISTOR);
+  #endif
+  #if ENABLED(E5_IS_TMC)
+    TMC26XStepper stepperE5(200, E5_ENABLE_PIN, E5_STEP_PIN, E5_DIR_PIN, E5_MAX_CURRENT, E5_SENSE_RESISTOR);
+  #endif
+  #if ENABLED(E6_IS_TMC)
+    TMC26XStepper stepperE6(200, E6_ENABLE_PIN, E6_STEP_PIN, E6_DIR_PIN, E6_MAX_CURRENT, E6_SENSE_RESISTOR);
+  #endif
 
   #define _TMC_INIT(A) do{ \
     stepper##A.setMicrosteps(A##_MICROSTEPS);
@@ -119,6 +128,15 @@
     #endif
     #if ENABLED(E3_IS_TMC)
       _TMC_INIT(E3);
+    #endif
+    #if ENABLED(E4_IS_TMC)
+      _TMC_INIT(E4);
+    #endif
+    #if ENABLED(E5_IS_TMC)
+      _TMC_INIT(E5);
+    #endif
+    #if ENABLED(E6_IS_TMC)
+      _TMC_INIT(E6);
     #endif
   }
 
@@ -513,6 +531,15 @@
   #if ENABLED(E3_IS_TMC2130)
     Trinamic_TMC2130 stepperE3(E3_CS_PIN);
   #endif
+  #if ENABLED(E4_IS_TMC2130)
+    Trinamic_TMC2130 stepperE4(E4_CS_PIN);
+  #endif
+  #if ENABLED(E5_IS_TMC2130)
+    Trinamic_TMC2130 stepperE5(E5_CS_PIN);
+  #endif
+  #if ENABLED(E6_IS_TMC2130)
+    Trinamic_TMC2130 stepperE6(E6_CS_PIN);
+  #endif
 
   void tmc2130_init() {
     #if ENABLED(X_IS_TMC2130)
@@ -544,6 +571,15 @@
     #endif
     #if ENABLED(E3_IS_TMC2130)
       _TMC2130_INIT(E3);
+    #endif
+    #if ENABLED(E4_IS_TMC2130)
+      _TMC2130_INIT(E4);
+    #endif
+    #if ENABLED(E5_IS_TMC2130)
+      _TMC2130_INIT(E5);
+    #endif
+    #if ENABLED(E6_IS_TMC2130)
+      _TMC2130_INIT(E6);
     #endif
   }
 
@@ -588,6 +624,15 @@
   #if ENABLED(E3_IS_L6470)
     L6470 stepperE3(E3_ENABLE_PIN);
   #endif
+  #if ENABLED(E4_IS_L6470)
+    L6470 stepperE4(E4_ENABLE_PIN);
+  #endif
+  #if ENABLED(E5_IS_L6470)
+    L6470 stepperE5(E5_ENABLE_PIN);
+  #endif
+  #if ENABLED(E6_IS_L6470)
+    L6470 stepperE6(E6_ENABLE_PIN);
+  #endif
 
   #define _L6470_INIT(A) do{ \
     stepper##A.init(A##_K_VAL); \
@@ -627,6 +672,15 @@
     #endif
     #if ENABLED(E3_IS_L6470)
       _L6470_INIT(E3);
+    #endif
+    #if ENABLED(E4_IS_L6470)
+      _L6470_INIT(E4);
+    #endif
+    #if ENABLED(E5_IS_L6470)
+      _L6470_INIT(E5);
+    #endif
+    #if ENABLED(E6_IS_L6470)
+      _L6470_INIT(E6);
     #endif
   }
 

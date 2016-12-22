@@ -227,6 +227,24 @@ static bool report_pin_name(int8_t pin, bool &pin_is_analog) {
   #if PIN_EXISTS(E4_STEP)
     PIN_SAY(E4_STEP_PIN);
   #endif
+  #if PIN_EXISTS(E5_DIR)
+    PIN_SAY(E5_DIR_PIN);
+  #endif
+  #if PIN_EXISTS(E5_ENABLE)
+    PIN_SAY(E5_ENABLE_PIN);
+  #endif
+  #if PIN_EXISTS(E5_STEP)
+    PIN_SAY(E5_STEP_PIN);
+  #endif
+  #if PIN_EXISTS(E6_DIR)
+    PIN_SAY(E6_DIR_PIN);
+  #endif
+  #if PIN_EXISTS(E6_ENABLE)
+    PIN_SAY(E6_ENABLE_PIN);
+  #endif
+  #if PIN_EXISTS(E6_STEP)
+    PIN_SAY(E6_STEP_PIN);
+  #endif
   #if defined(encrot1) && encrot1 >= 0
     PIN_SAY(encrot1);
   #endif

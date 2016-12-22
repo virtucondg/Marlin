@@ -306,6 +306,15 @@
 #if !defined(E3_AUTO_FAN_PIN) && defined(ORIG_E3_AUTO_FAN_PIN)
   #define E3_AUTO_FAN_PIN ORIG_E3_AUTO_FAN_PIN
 #endif
+#if !defined(E4_AUTO_FAN_PIN) && defined(ORIG_E4_AUTO_FAN_PIN)
+  #define E4_AUTO_FAN_PIN ORIG_E4_AUTO_FAN_PIN
+#endif
+#if !defined(E5_AUTO_FAN_PIN) && defined(ORIG_E5_AUTO_FAN_PIN)
+  #define E5_AUTO_FAN_PIN ORIG_E5_AUTO_FAN_PIN
+#endif
+#if !defined(E6_AUTO_FAN_PIN) && defined(ORIG_E6_AUTO_FAN_PIN)
+  #define E6_AUTO_FAN_PIN ORIG_E6_AUTO_FAN_PIN
+#endif
 
 // List of pins which to ignore when asked to change by gcode, 0 and 1 are RX and TX, do not mess with those!
 #define _E0_PINS E0_STEP_PIN, E0_DIR_PIN, E0_ENABLE_PIN, E0_MS1_PIN, E0_MS2_PIN,
@@ -313,6 +322,8 @@
 #define _E2_PINS
 #define _E3_PINS
 #define _E4_PINS
+#define _E5_PINS
+#define _E6_PINS
 
 #if EXTRUDERS > 1
   #undef _E1_PINS
@@ -372,7 +383,15 @@
       #if MIXING_STEPPERS > 4
         #undef _E4_PINS
         #define _E4_PINS E4_STEP_PIN, E4_DIR_PIN, E4_ENABLE_PIN,
-      #endif
+		  #if MIXING_STEPPERS > 5
+			#undef _E5_PINS
+			#define _E5_PINS E5_STEP_PIN, E5_DIR_PIN, E5_ENABLE_PIN,
+			  #if MIXING_STEPPERS > 6
+				#undef _E6_PINS
+				#define _E6_PINS E6_STEP_PIN, E6_DIR_PIN, E6_ENABLE_PIN,
+			  #endif
+		  #endif
+	  #endif
     #endif
   #endif
 #endif

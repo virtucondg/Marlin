@@ -383,6 +383,99 @@
 #define E3_STEP_WRITE(STATE) WRITE(E3_STEP_PIN,STATE)
 #define E3_STEP_READ READ(E3_STEP_PIN)
 
+// E4 Stepper
+#if ENABLED(HAVE_L6470DRIVER) && ENABLED(E4_IS_L6470)
+  extern L6470 stepperE4;
+  #define E4_ENABLE_INIT NOOP
+  #define E4_ENABLE_WRITE(STATE) do{if(STATE) stepperE4.Step_Clock(stepperE4.getStatus() & STATUS_HIZ); else stepperE4.softFree();}while(0)
+  #define E4_ENABLE_READ (stepperE4.getStatus() & STATUS_HIZ)
+  #define E4_DIR_INIT NOOP
+  #define E4_DIR_WRITE(STATE) stepperE4.Step_Clock(STATE)
+  #define E4_DIR_READ (stepperE4.getStatus() & STATUS_DIR)
+#else
+  #if ENABLED(HAVE_TMCDRIVER) && ENABLED(E4_IS_TMC)
+    extern TMC26XStepper stepperE4;
+    #define E4_ENABLE_INIT NOOP
+    #define E4_ENABLE_WRITE(STATE) stepperE4.setEnabled(STATE)
+    #define E4_ENABLE_READ stepperE4.isEnabled()
+  #else
+    #if ENABLED(HAVE_TMC2130DRIVER) && ENABLED(E4_IS_TMC2130)
+      extern Trinamic_TMC2130 stepperE4;
+    #endif
+    #define E4_ENABLE_INIT SET_OUTPUT(E4_ENABLE_PIN)
+    #define E4_ENABLE_WRITE(STATE) WRITE(E4_ENABLE_PIN,STATE)
+    #define E4_ENABLE_READ READ(E4_ENABLE_PIN)
+  #endif
+  #define E4_DIR_INIT SET_OUTPUT(E4_DIR_PIN)
+  #define E4_DIR_WRITE(STATE) WRITE(E4_DIR_PIN,STATE)
+  #define E4_DIR_READ READ(E4_DIR_PIN)
+#endif
+#define E4_STEP_INIT SET_OUTPUT(E4_STEP_PIN)
+#define E4_STEP_WRITE(STATE) WRITE(E4_STEP_PIN,STATE)
+#define E4_STEP_READ READ(E4_STEP_PIN)
+
+// E5 Stepper
+#if ENABLED(HAVE_L6470DRIVER) && ENABLED(E5_IS_L6470)
+  extern L6470 stepperE5;
+  #define E5_ENABLE_INIT NOOP
+  #define E5_ENABLE_WRITE(STATE) do{if(STATE) stepperE5.Step_Clock(stepperE5.getStatus() & STATUS_HIZ); else stepperE5.softFree();}while(0)
+  #define E5_ENABLE_READ (stepperE5.getStatus() & STATUS_HIZ)
+  #define E5_DIR_INIT NOOP
+  #define E5_DIR_WRITE(STATE) stepperE5.Step_Clock(STATE)
+  #define E5_DIR_READ (stepperE5.getStatus() & STATUS_DIR)
+#else
+  #if ENABLED(HAVE_TMCDRIVER) && ENABLED(E5_IS_TMC)
+    extern TMC26XStepper stepperE5;
+    #define E5_ENABLE_INIT NOOP
+    #define E5_ENABLE_WRITE(STATE) stepperE5.setEnabled(STATE)
+    #define E5_ENABLE_READ stepperE5.isEnabled()
+  #else
+    #if ENABLED(HAVE_TMC2130DRIVER) && ENABLED(E5_IS_TMC2130)
+      extern Trinamic_TMC2130 stepperE5;
+    #endif
+    #define E5_ENABLE_INIT SET_OUTPUT(E5_ENABLE_PIN)
+    #define E5_ENABLE_WRITE(STATE) WRITE(E5_ENABLE_PIN,STATE)
+    #define E5_ENABLE_READ READ(E5_ENABLE_PIN)
+  #endif
+  #define E5_DIR_INIT SET_OUTPUT(E5_DIR_PIN)
+  #define E5_DIR_WRITE(STATE) WRITE(E5_DIR_PIN,STATE)
+  #define E5_DIR_READ READ(E5_DIR_PIN)
+#endif
+#define E5_STEP_INIT SET_OUTPUT(E5_STEP_PIN)
+#define E5_STEP_WRITE(STATE) WRITE(E5_STEP_PIN,STATE)
+#define E5_STEP_READ READ(E5_STEP_PIN)
+
+// E6 Stepper
+#if ENABLED(HAVE_L6470DRIVER) && ENABLED(E6_IS_L6470)
+  extern L6470 stepperE6;
+  #define E6_ENABLE_INIT NOOP
+  #define E6_ENABLE_WRITE(STATE) do{if(STATE) stepperE6.Step_Clock(stepperE6.getStatus() & STATUS_HIZ); else stepperE6.softFree();}while(0)
+  #define E6_ENABLE_READ (stepperE6.getStatus() & STATUS_HIZ)
+  #define E6_DIR_INIT NOOP
+  #define E6_DIR_WRITE(STATE) stepperE6.Step_Clock(STATE)
+  #define E6_DIR_READ (stepperE6.getStatus() & STATUS_DIR)
+#else
+  #if ENABLED(HAVE_TMCDRIVER) && ENABLED(E6_IS_TMC)
+    extern TMC26XStepper stepperE6;
+    #define E6_ENABLE_INIT NOOP
+    #define E6_ENABLE_WRITE(STATE) stepperE6.setEnabled(STATE)
+    #define E6_ENABLE_READ stepperE6.isEnabled()
+  #else
+    #if ENABLED(HAVE_TMC2130DRIVER) && ENABLED(E6_IS_TMC2130)
+      extern Trinamic_TMC2130 stepperE6;
+    #endif
+    #define E6_ENABLE_INIT SET_OUTPUT(E6_ENABLE_PIN)
+    #define E6_ENABLE_WRITE(STATE) WRITE(E6_ENABLE_PIN,STATE)
+    #define E6_ENABLE_READ READ(E6_ENABLE_PIN)
+  #endif
+  #define E6_DIR_INIT SET_OUTPUT(E6_DIR_PIN)
+  #define E6_DIR_WRITE(STATE) WRITE(E6_DIR_PIN,STATE)
+  #define E6_DIR_READ READ(E6_DIR_PIN)
+#endif
+#define E6_STEP_INIT SET_OUTPUT(E6_STEP_PIN)
+#define E6_STEP_WRITE(STATE) WRITE(E6_STEP_PIN,STATE)
+#define E6_STEP_READ READ(E6_STEP_PIN)
+
 /**
  * Extruder indirection for the single E axis
  */
@@ -430,6 +523,10 @@
   #endif
 #elif ENABLED(MIXING_EXTRUDER)
   #define E_STEP_WRITE(v) NOOP /* not used for mixing extruders! */
+  #if MIXING_STEPPERS > 6
+    #define En_STEP_WRITE(n,v) { switch (n) { case 0: E0_STEP_WRITE(v); break; case 1: E1_STEP_WRITE(v); break; case 2: E2_STEP_WRITE(v); break; case 3: E3_STEP_WRITE(v); break; case 4: E4_STEP_WRITE(v); break; case 5: E5_STEP_WRITE(v); break; case 6: E6_STEP_WRITE(v); } }
+    #define NORM_E_DIR() { E0_DIR_WRITE(!INVERT_E0_DIR); E1_DIR_WRITE(!INVERT_E1_DIR); E2_DIR_WRITE(!INVERT_E2_DIR); E3_DIR_WRITE(!INVERT_E3_DIR); E4_DIR_WRITE(!INVERT_E4_DIR); E5_DIR_WRITE(!INVERT_E5_DIR); E6_DIR_WRITE(!INVERT_E6_DIR); }
+    #define REV_E_DIR()  { E0_DIR_WRITE( INVERT_E0_DIR); E1_DIR_WRITE( INVERT_E1_DIR); E2_DIR_WRITE( INVERT_E2_DIR); E3_DIR_WRITE( INVERT_E3_DIR); E4_DIR_WRITE( INVERT_E4_DIR); E5_DIR_WRITE( INVERT_E5_DIR; E6_DIR_WRITE( INVERT_E6_DIR)); }
   #if MIXING_STEPPERS > 5
     #define En_STEP_WRITE(n,v) { switch (n) { case 0: E0_STEP_WRITE(v); break; case 1: E1_STEP_WRITE(v); break; case 2: E2_STEP_WRITE(v); break; case 3: E3_STEP_WRITE(v); break; case 4: E4_STEP_WRITE(v); break; case 5: E5_STEP_WRITE(v); } }
     #define NORM_E_DIR() { E0_DIR_WRITE(!INVERT_E0_DIR); E1_DIR_WRITE(!INVERT_E1_DIR); E2_DIR_WRITE(!INVERT_E2_DIR); E3_DIR_WRITE(!INVERT_E3_DIR); E4_DIR_WRITE(!INVERT_E4_DIR); E5_DIR_WRITE(!INVERT_E5_DIR); }

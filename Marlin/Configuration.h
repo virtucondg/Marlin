@@ -177,7 +177,7 @@
 #if ENABLED(MIXING_EXTRUDER)
   #define MIXING_STEPPERS 2        // Number of steppers in your mixing extruder
   #define MIXING_VIRTUAL_TOOLS 16  // Use the Virtual Tool method with M163 and M164
-  //#define DIRECT_MIXING_IN_G1    // Allow ABCDHI mix factors in G1 movement commands
+  //#define DIRECT_MIXING_IN_G1    // Allow ABCDHIJ mix factors in G1 movement commands
 #endif
 
 // Offset of the extruders (uncomment if using more than one and relying on firmware to position when changing).

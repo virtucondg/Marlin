@@ -156,22 +156,66 @@ void manage_inactivity(bool ignore_stepper_queue = false);
   /**
    * Mixing steppers synchronize their enable (and direction) together
    */
-  #if MIXING_STEPPERS > 3
+  #if MIXING_STEPPERS > 6
+    #define  enable_e0() { E0_ENABLE_WRITE( E_ENABLE_ON); E1_ENABLE_WRITE( E_ENABLE_ON); E2_ENABLE_WRITE( E_ENABLE_ON); E3_ENABLE_WRITE( E_ENABLE_ON); E4_ENABLE_WRITE( E_ENABLE_ON); E5_ENABLE_WRITE( E_ENABLE_ON); E6_ENABLE_WRITE( E_ENABLE_ON); }
+    #define disable_e0() { E0_ENABLE_WRITE(!E_ENABLE_ON); E1_ENABLE_WRITE(!E_ENABLE_ON); E2_ENABLE_WRITE(!E_ENABLE_ON); E3_ENABLE_WRITE(!E_ENABLE_ON); E4_ENABLE_WRITE(!E_ENABLE_ON); E5_ENABLE_WRITE(!E_ENABLE_ON); E6_ENABLE_WRITE(!E_ENABLE_ON); }
+    #define  enable_e1() NOOP
+    #define disable_e1() NOOP
+    #define  enable_e2() NOOP
+    #define disable_e2() NOOP
+    #define  enable_e3() NOOP
+    #define disable_e3() NOOP
+    #define  enable_e4() NOOP
+    #define disable_e4() NOOP
+    #define  enable_e5() NOOP
+    #define disable_e5() NOOP
+    #define  enable_e6() NOOP
+    #define disable_e6() NOOP
+  #elif MIXING_STEPPERS > 5
+    #define  enable_e0() { E0_ENABLE_WRITE( E_ENABLE_ON); E1_ENABLE_WRITE( E_ENABLE_ON); E2_ENABLE_WRITE( E_ENABLE_ON); E3_ENABLE_WRITE( E_ENABLE_ON); E4_ENABLE_WRITE( E_ENABLE_ON); E5_ENABLE_WRITE( E_ENABLE_ON); }
+    #define disable_e0() { E0_ENABLE_WRITE(!E_ENABLE_ON); E1_ENABLE_WRITE(!E_ENABLE_ON); E2_ENABLE_WRITE(!E_ENABLE_ON); E3_ENABLE_WRITE(!E_ENABLE_ON); E4_ENABLE_WRITE(!E_ENABLE_ON); E5_ENABLE_WRITE(!E_ENABLE_ON); }
+    #define  enable_e1() NOOP
+    #define disable_e1() NOOP
+    #define  enable_e2() NOOP
+    #define disable_e2() NOOP
+    #define  enable_e3() NOOP
+    #define disable_e3() NOOP
+    #define  enable_e4() NOOP
+    #define disable_e4() NOOP
+    #define  enable_e5() NOOP
+    #define disable_e5() NOOP
+  #elif MIXING_STEPPERS > 4
+    #define  enable_e0() { E0_ENABLE_WRITE( E_ENABLE_ON); E1_ENABLE_WRITE( E_ENABLE_ON); E2_ENABLE_WRITE( E_ENABLE_ON); E3_ENABLE_WRITE( E_ENABLE_ON); E4_ENABLE_WRITE( E_ENABLE_ON); }
+    #define disable_e0() { E0_ENABLE_WRITE(!E_ENABLE_ON); E1_ENABLE_WRITE(!E_ENABLE_ON); E2_ENABLE_WRITE(!E_ENABLE_ON); E3_ENABLE_WRITE(!E_ENABLE_ON); E4_ENABLE_WRITE(!E_ENABLE_ON); }
+    #define  enable_e1() NOOP
+    #define  enable_e2() NOOP
+    #define disable_e2() NOOP
+    #define  enable_e3() NOOP
+    #define disable_e3() NOOP
+    #define  enable_e4() NOOP
+    #define disable_e4() NOOP
+  #elif MIXING_STEPPERS > 3
     #define  enable_e0() { E0_ENABLE_WRITE( E_ENABLE_ON); E1_ENABLE_WRITE( E_ENABLE_ON); E2_ENABLE_WRITE( E_ENABLE_ON); E3_ENABLE_WRITE( E_ENABLE_ON); }
     #define disable_e0() { E0_ENABLE_WRITE(!E_ENABLE_ON); E1_ENABLE_WRITE(!E_ENABLE_ON); E2_ENABLE_WRITE(!E_ENABLE_ON); E3_ENABLE_WRITE(!E_ENABLE_ON); }
+    #define  enable_e1() NOOP
+    #define disable_e1() NOOP
+    #define  enable_e2() NOOP
+    #define disable_e2() NOOP
+    #define  enable_e3() NOOP
+    #define disable_e3() NOOP
   #elif MIXING_STEPPERS > 2
     #define  enable_e0() { E0_ENABLE_WRITE( E_ENABLE_ON); E1_ENABLE_WRITE( E_ENABLE_ON); E2_ENABLE_WRITE( E_ENABLE_ON); }
     #define disable_e0() { E0_ENABLE_WRITE(!E_ENABLE_ON); E1_ENABLE_WRITE(!E_ENABLE_ON); E2_ENABLE_WRITE(!E_ENABLE_ON); }
+    #define  enable_e1() NOOP
+    #define disable_e1() NOOP
+    #define  enable_e2() NOOP
+    #define disable_e2() NOOP
   #else
     #define  enable_e0() { E0_ENABLE_WRITE( E_ENABLE_ON); E1_ENABLE_WRITE( E_ENABLE_ON); }
     #define disable_e0() { E0_ENABLE_WRITE(!E_ENABLE_ON); E1_ENABLE_WRITE(!E_ENABLE_ON); }
+    #define  enable_e1() NOOP
+    #define disable_e1() NOOP
   #endif
-  #define  enable_e1() NOOP
-  #define disable_e1() NOOP
-  #define  enable_e2() NOOP
-  #define disable_e2() NOOP
-  #define  enable_e3() NOOP
-  #define disable_e3() NOOP
 
 #else // !MIXING_EXTRUDER
 
@@ -205,6 +249,30 @@ void manage_inactivity(bool ignore_stepper_queue = false);
   #else
     #define  enable_e3() NOOP
     #define disable_e3() NOOP
+  #endif
+
+  #if E_STEPPERS > 4 && HAS_E4_ENABLE
+    #define  enable_e4() E4_ENABLE_WRITE( E_ENABLE_ON)
+    #define disable_e4() E4_ENABLE_WRITE(!E_ENABLE_ON)
+  #else
+    #define  enable_e4() NOOP
+    #define disable_e4() NOOP
+  #endif
+
+  #if E_STEPPERS > 5 && HAS_E5_ENABLE
+    #define  enable_e5() E5_ENABLE_WRITE( E_ENABLE_ON)
+    #define disable_e5() E5_ENABLE_WRITE(!E_ENABLE_ON)
+  #else
+    #define  enable_e5() NOOP
+    #define disable_e5() NOOP
+  #endif
+
+  #if E_STEPPERS > 6 && HAS_E6_ENABLE
+    #define  enable_e6() E6_ENABLE_WRITE( E_ENABLE_ON)
+    #define disable_e6() E6_ENABLE_WRITE(!E_ENABLE_ON)
+  #else
+    #define  enable_e6() NOOP
+    #define disable_e6() NOOP
   #endif
 
 #endif // !MIXING_EXTRUDER
